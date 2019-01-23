@@ -1,35 +1,31 @@
-/*
-Keyrt með:
-node 02.request.js
-Keyrir upp einfaldan express þjón sem skrifar út ýmislegt úr request hlut, sjá
-http://expressjs.com/en/4x/api.html#req
-*/
-
 const express = require('express');
 
 const app = express();
-
-app.use((req, res) => {
-  res.send(`
-    method: ${req.method}<br>
-    url: ${req.url}<br>
-    originalUrl: ${req.originalUrl}<br>
-    ip: ${req.ip}<br>
-    protocol: ${req.protocol}<br>
-    hostname: ${req.hostname}<br>
-    query: ${JSON.stringify(req.query)}<br>
-    <br>
-    User-agent: ${req.get('User-agent')}<br>
-    Host: ${req.get('Host')}<br>
-    <br>
-    accepts json? ${req.accepts('json')}<br>
-    accepts foo? ${req.accepts('foo')}<br>
-  `);
-});
-
 const hostname = '127.0.0.1';
-const port = 3000;
+const port = 3001;
+const path = require('path');
+const lectures = require('./lectures');
+
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'ejs');
+
+app.use(express.static(path.join(__dirname, 'public')));
+app.use('/img', express.static(path.join(__dirname, 'public/img')));
+
+app.use('/', lectures);
+
+function notFoundHandler(req, res, next) {
+  res.status(404).send('404 Not Found');
+}
+
+function errorHandler(err, req, res, next) {
+  console.error(err);
+  res.status(500).send('Villa!');
+}
+
+app.use(notFoundHandler);
+app.use(errorHandler);
 
 app.listen(port, hostname, () => {
-  console.log(`Server running at http://${hostname}:${port}/`);
+  console.info(`Server @ http://${hostname}:${port}/`);
 });
