@@ -6,6 +6,7 @@ const readFile = util.promisify(fs.readFile);
 
 const router = express.Router();
 
+// les inn json skrána
 async function readJSON() {
   const skra = await readFile('./lectures.json');
   const json = JSON.parse(skra);
@@ -20,24 +21,42 @@ async function list(req, res) {
   // lesa inn fyrirlestra og birta þá
   const title = 'Fyrirlestrar';
   const data = await readJSON();
-  const { lectures } = data;
+  const {
+    lectures,
+  } = data;
 
-  return res.render('index', { title, lectures, isLecturePage: false });
+  // sækja list.ejs
+  return res.render('list', {
+    title,
+    lectures,
+    isLecturePage: false,
+  });
 }
 
 async function lecture(req, res, next) {
-  const { slug } = req.params;
+  const {
+    slug,
+  } = req.params;
   const data = await readJSON();
+
+  // finna viðeigandi fyrirlestur skv. slug
   const foundLecture = data.lectures.find(a => a.slug === slug);
 
+  // ef fyrirlestur finnst ekki
   if (!foundLecture) {
     return next();
   }
 
-  const { title } = foundLecture;
+  const {
+    title,
+  } = foundLecture;
 
+  // sækja lecture.ejs
   return res.render('lecture', {
-    title, lecture: foundLecture, content: foundLecture.content, isLecturePage: true,
+    title,
+    lecture: foundLecture,
+    content: foundLecture.content,
+    isLecturePage: true,
   });
 }
 

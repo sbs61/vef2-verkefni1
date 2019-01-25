@@ -13,14 +13,16 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', lectures);
 
-function notFoundHandler(req, res, next) {  // eslint-disable-line
+function notFoundHandler(req, res, next) { // eslint-disable-line
   res.status(404).send('404 Not Found');
 }
 
-function errorHandler(err, req, res, next) {  // eslint-disable-line
+function errorHandler(err, req, res, next) { // eslint-disable-line
   console.error(err);
   const message = 'Villa kom upp!';
-  res.status(500).render('error', { message });
+  res.status(500).render('error', {
+    message,
+  });
 }
 
 app.use(notFoundHandler);
