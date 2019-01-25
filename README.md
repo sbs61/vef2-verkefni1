@@ -2,8 +2,6 @@
 
 npm install 
 
-npm install express --save 
-
 npm test 
 
 npm start 
