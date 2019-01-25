@@ -13,14 +13,8 @@
       <% } else if (c.type === "text") { %>
       <div class="item item--text">
         <div class=item__content>
-          <% function text(data) {
-                      const split = data.split('\n');
-            
-                      return split;
-                    }
-
-                    let p = text(c.data)
-                    p.forEach((p) => { %>
+          <%  let p = c.data.split('\n')
+              p.forEach((p) => { %>
           <p class="item__text"><%= p%></p>
           <% }) %>
         </div>
