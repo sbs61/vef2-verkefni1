@@ -1,3 +1,11 @@
+# Keyrsla
+
+npm install
+npm install express --save
+npm test
+npm start
+
+
 # Verkefni 1
 
 Verkefni 1 snýst um að útfæra bakenda sem birtir gögn fyrir „prótótýpuvef af fyrirlestravef“ sem byggð var sem [seinna hópverkefni í vefforritun 1, 2018](https://github.com/vefforritun/vef1-2018-h2-synilausn). Í því verkefni voru gögn búin til og birt _aðeins_ á framenda. Í þessu verkefni skal birta þau frá _bakenda_.
