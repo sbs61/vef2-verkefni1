@@ -8,3 +8,20 @@
     <link href="https://fonts.googleapis.com/css?family=Lora:400,400i|Roboto+Mono:400,700" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
   </head>
+
+  <% if(!isLecturePage) { %>
+  <body>
+      <header class="heading heading--main">
+        <span class="heading__category">Vefforritun</span>
+        <h1 class="heading__title">Fyrirlestrar</h1>
+      </header>
+      <main>
+    <% } else { %>
+    <body class="lecture-page">
+        <header class="heading" style="background-image: url('<%=lecture.image%>')">
+          <span class="heading__category"><%= lecture.category %></span>
+          <h2 class="heading__title"><%= title %></h2>
+        </header>
+        <main>
+            <section class="lecture">
+        <% } %>

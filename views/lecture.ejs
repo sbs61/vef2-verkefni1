@@ -1,12 +1,5 @@
 <%- include('header') -%>
 
-  <body class="lecture-page">
-    <main>
-      <section class="lecture">
-        <div class="heading" style="background-image: url('<%=lecture.image%>')">
-          <span class="heading__category"><%= lecture.category %></span>
-          <h2 class="heading__title"><%= title %></h2>
-        </div>
         <div class="lecture__content">
           <div class="lecture__row">
           <div class="lecture__col">
@@ -68,11 +61,5 @@
           </div>
           </div>
       </div>
-        <footer class="lecture__footer">
-          <button class="lecture__finish">Klára fyrirlestur</button>
-          <a class="lecture__back" href="/">Til baka</a>
-        </footer>
-      </section>
-    </main>
 
 <%- include('footer') -%>

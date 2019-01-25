@@ -1,11 +1,5 @@
 <%- include('header') -%>
 
-<body>
-  <header class="heading heading--main">
-    <span class="heading__category">Vefforritun</span>
-    <h1 class="heading__title">Fyrirlestrar</h1>
-  </header>
-  <main>
     <ul class="filters">
       <li>
         <button class="filters__filter filters__filter--html">HTML</button>
@@ -22,9 +16,13 @@
         <% lectures.forEach((slug) => { %>
         <div class="list__col">
           <a class="listItem" href=<%= slug.slug%>>
-            <div class="listItem__image"> 
-              <img src=<%= slug.thumbnail %> alt="">
-            </div>
+              <% if(slug.thumbnail){ %>
+                <div class="listItem__image"> 
+                   <img src=<%= slug.thumbnail %> alt="">
+                </div>
+               <%} else { %>
+                <div class="listItem__image listItem__image--empty"> </div>
+                <% } %>
             <div class="listItem__bottom">
               <div class="listItem__texts">
                 <span class="listItem__category"><%= slug.category %></span>
@@ -37,5 +35,3 @@
       </div>
     </div>
   </main>
-
-<%- include('footer') -%>

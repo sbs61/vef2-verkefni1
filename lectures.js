@@ -22,10 +22,7 @@ async function list(req, res) {
   const data = await readJSON();
   const { lectures } = data;
 
-  // console.log(lectures);
-
-  // res.send("test 123");
-  res.render('index', { title, lectures });
+  return res.render('index', { title, lectures, isLecturePage: false });
 }
 
 async function lecture(req, res, next) {
@@ -39,8 +36,9 @@ async function lecture(req, res, next) {
 
   const { title } = foundLecture;
 
-  // const html = item.createContent(foundLecture.content);
-  return res.render('lecture', { title, lecture: foundLecture, content: foundLecture.content });
+  return res.render('lecture', {
+    title, lecture: foundLecture, content: foundLecture.content, isLecturePage: true,
+  });
 }
 
 router.get('/', catchErrors(list));
