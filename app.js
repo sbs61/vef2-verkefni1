@@ -4,7 +4,7 @@ const lectures = require('./lectures');
 
 const app = express();
 const hostname = '127.0.0.1';
-const port = 3001;
+const port = 3000;
 
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
