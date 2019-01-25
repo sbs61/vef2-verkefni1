@@ -1,9 +1,12 @@
 # Keyrsla
 
-npm install
-npm install express --save
-npm test
-npm start
+npm install 
+
+npm install express --save 
+
+npm test 
+
+npm start 
 
 
 # Verkefni 1
