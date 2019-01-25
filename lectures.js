@@ -1,5 +1,4 @@
 const express = require('express');
-
 const fs = require('fs');
 const util = require('util');
 
@@ -7,11 +6,9 @@ const readFile = util.promisify(fs.readFile);
 
 const router = express.Router();
 
-async function lesaskra() {
+async function readJSON() {
   const skra = await readFile('./lectures.json');
-
   const json = JSON.parse(skra);
-
   return json;
 }
 
@@ -20,21 +17,30 @@ function catchErrors(fn) {
 }
 
 async function list(req, res) {
-  /* todo útfæra */
-  // lesa fyrirstrana inn (render) og birta
+  // lesa inn fyrirlestra og birta þá
   const title = 'Fyrirlestrar';
-  const data = await lesaskra();
+  const data = await readJSON();
+  const { lectures } = data;
 
-  console.log(data.lectures[0].slug);
+  // console.log(lectures);
 
-  res.send('wooow virkar');
-  //res.render('data', { title, data: foundLecture });
-
-  return Promise.all(data);
+  // res.send("test 123");
+  res.render('index', { title, lectures });
 }
 
 async function lecture(req, res, next) {
-  /* todo útfæra */
+  const { slug } = req.params;
+  const data = await readJSON();
+  const foundLecture = data.lectures.find(a => a.slug === slug);
+
+  if (!foundLecture) {
+    return next();
+  }
+
+  const { title } = foundLecture;
+
+  // const html = item.createContent(foundLecture.content);
+  return res.render('lecture', { title, lecture: foundLecture, content: foundLecture.content });
 }
 
 router.get('/', catchErrors(list));

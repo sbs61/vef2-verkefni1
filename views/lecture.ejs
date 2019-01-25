@@ -1,0 +1,78 @@
+<%- include('header') -%>
+
+  <body class="lecture-page">
+    <main>
+      <section class="lecture">
+        <div class="heading" style="background-image: url('<%=lecture.image%>')">
+          <span class="heading__category"><%= lecture.category %></span>
+          <h2 class="heading__title"><%= title %></h2>
+        </div>
+        <div class="lecture__content">
+          <div class="lecture__row">
+          <div class="lecture__col">
+          <% content.forEach((c) => { %>
+            <% if(c.type === "youtube"){ %>
+              <div class="item item--youtube">
+                <div class=item__content>
+                  <iframe class="item__iframe" src=<%= c.data%> frameborder="0"></iframe>
+                </div>
+              </div>
+            <% } else if (c.type === "text") { %>  
+              <div class="item item--text">
+                  <div class=item__content>
+                      <div class="item__text"><%= c.data%></div>
+                  </div>
+                </div>
+           <% } else if (c.type === "quote") { %>  
+            <div class="item item--blockquote">
+                <div class=item__content>
+                  <blockquote>
+                    <p class="item__quote"><%= c.data%></p>
+                    <p class="item__attribute"><%= c.attribute%></p>
+                  </blockquote>
+                </div>
+              </div>
+            <% } else if (c.type === "image") { %>  
+            <div class="item item--image">
+                <div class=item__content>
+                  <div>
+                      <img class="image__img" alt=<%= c.caption%> src=<%= c.data%>>
+                      <p class="item__caption"><%= c.caption%></p>
+                  </div>
+                </div>
+              </div>
+            <% } else if (c.type === "heading") { %>  
+            <div class="item item--heading">
+                <div class=item__content>
+                  <h3 class="item__heading"><%= c.data%></h3>
+                </div>
+              </div>
+            <% } else if (c.type === "list") { %>  
+            <div class="item item--list">
+                <div class=item__content>
+                  <ul class="item__ul">
+                      <% c.data.forEach((data) => { %>
+                        <li class="item__li"><%= data%></li>
+                        <% }); %>
+                  </ul>
+                </div>
+              </div>
+            <% } else if (c.type === "code") { %>  
+            <div class="item item--heading">
+                <div class=item__content>
+                  <pre class="item__code"><%= c.data%></pre>
+                </div>
+              </div>
+         <% } %>
+          <% }); %>
+          </div>
+          </div>
+      </div>
+        <footer class="lecture__footer">
+          <button class="lecture__finish">Klára fyrirlestur</button>
+          <a class="lecture__back" href="/">Til baka</a>
+        </footer>
+      </section>
+    </main>
+
+<%- include('footer') -%>
